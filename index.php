@@ -15,7 +15,7 @@
         $adatbazis = new Ab();
         //egyéb metódusok hívása
         //$adatbazis->adatLeker("kép", "szín");
-        $adatbazis->adatLeker2("név", "kép", "szín");
+        $adatbazis->adatLeker2("nev", "kep", "szin");
         $adatbazis->kapcsolatBezar();
     ?>
 </body>

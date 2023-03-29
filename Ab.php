@@ -4,7 +4,7 @@ class Ab {
     private $host = "localhost";
     private $felhasznaloNev = "root";
     private $jelszo = "";
-    private $abNev = "magyar_kártya";
+    private $abNev = "magyarkartya";
     private $kapcsolat;
     //konstruktor
     function __construct(){
