@@ -44,5 +44,8 @@ class Ab {
     function kapcsolatBezar(){
         $this->kapcsolat->close();
     }
+    function oszlop(){
+        
+    }
 }
 ?>
