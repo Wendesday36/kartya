@@ -32,20 +32,20 @@ class Ab {
         }
     }
 
-    function adatLeker2($oszlop1, $oszlop2,$tabla){
+    function adatLekerTablazatba($oszlop1, $oszlop2,$tabla){
+        echo "<table>";
         $sql = "SELECT $oszlop1, $oszlop2 FROM $tabla";
         $phpTomb = $this->kapcsolat->query($sql);
         while ($sor = $phpTomb->fetch_assoc()){
-            echo "<p>$sor[$oszlop1]</p>";
-            echo "<img src = \"forras/$sor[$oszlop2]\" alt=\"kártya képe\">";
-            echo "<br>";
+            echo "<tr><td>$sor[$oszlop1]</td></tr>";
+            echo "<tr><td><img src = \"forras/$sor[$oszlop2]\" alt=\"kártya képe\"></td></tr>";
+           /*  echo "<br>"; */
         }
+        echo"</table>";
     }
     function kapcsolatBezar(){
         $this->kapcsolat->close();
     }
-    function oszlop(){
-        
-    }
+    
 }
 ?>
