@@ -2,3 +2,10 @@ body{
     background-image: url(forras/ash.jpg);
     
 }
+table{
+    background-color: aliceblue ;
+    margin: auto;
+}
+table tr td{
+    border: 1px black solid;
+}

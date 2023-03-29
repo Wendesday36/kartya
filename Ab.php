@@ -34,12 +34,16 @@ class Ab {
 
     function adatLekerTablazatba($oszlop1, $oszlop2,$tabla){
         echo "<table>";
+        echo"<tr><th>név</th><th>kép</th></tr>";
         $sql = "SELECT $oszlop1, $oszlop2 FROM $tabla";
         $phpTomb = $this->kapcsolat->query($sql);
         while ($sor = $phpTomb->fetch_assoc()){
-            echo "<tr><td>$sor[$oszlop1]</td></tr>";
-            echo "<tr><td><img src = \"forras/$sor[$oszlop2]\" alt=\"kártya képe\"></td></tr>";
+            
+           
+            echo "<tr><td>$sor[$oszlop1]</td>";
+            echo "<td><img src = \"forras/$sor[$oszlop2]\" alt=\"kártya képe\"></td></tr>";
            /*  echo "<br>"; */
+           
         }
         echo"</table>";
     }
