@@ -68,8 +68,8 @@ class Ab {
     }
 
     function torol($tabla){
-        $sql ="TRUNCATED table $tabla";
-       $torles =  $this->kapcsolat->query($sql);
+        $sql ="TRUNCATE table $tabla";
+        $torles = $this->kapcsolat->query($sql);
        return $torles;
     }
 
