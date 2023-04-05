@@ -12,12 +12,17 @@
     <title>Magyar kártya</title>
 </head>
 <body>
+    <main>
     <?php
         $adatbazis = new Ab();
         //egyéb metódusok hívása
         //$adatbazis->adatLeker("kép", "szín");
-        $adatbazis->adatLekerTablazatba("nev", "kep", "szin");
+       /*  $adatbazis->adatLekerTablazatba("nev", "kep", "szin"); */
+       //$phpTomb = $adatbazis->adatLeker("kép","szín");
+       //$adatbazis -> megjelenites($phpTomb);
+       $adatbazis->kartyaFeltolt("kártya");
         $adatbazis->kapcsolatBezar();
     ?>
+    </main>
 </body>
 </html>

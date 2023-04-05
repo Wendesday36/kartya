@@ -4,12 +4,13 @@ class Ab {
     private $host = "localhost";
     private $felhasznaloNev = "root";
     private $jelszo = "";
-    private $abNev = "magyarkartya";
+    private $abNev = "magyar_kártya";
     private $kapcsolat;
     //konstruktor
     function __construct(){
         $this->kapcsolat = new mysqli(
-            $this->host, $this->felhasznaloNev,
+            $this->host, 
+            $this->felhasznaloNev,
             $this->jelszo,
             $this->abNev);
         if ($this->kapcsolat->connect_error){
@@ -25,31 +26,56 @@ class Ab {
     //metódusok
     function adatLeker($oszlop, $tabla){
         $sql = "SELECT $oszlop FROM $tabla";
-        $phpTomb = $this->kapcsolat->query($sql);
+        return $this->kapcsolat->query($sql);
+        
+    }
+    function megjelenites($phpTomb){
         while ($sor = $phpTomb->fetch_row()){
             echo "<img src = \"forras/$sor[0]\" alt=\"kártya képe\">";
             echo "<br>";
         }
     }
-
-    function adatLekerTablazatba($oszlop1, $oszlop2,$tabla){
-        echo "<table>";
-        echo"<tr><th>név</th><th>kép</th></tr>";
-        $sql = "SELECT $oszlop1, $oszlop2 FROM $tabla";
-        $phpTomb = $this->kapcsolat->query($sql);
-        while ($sor = $phpTomb->fetch_assoc()){
-            
-           
-            echo "<tr><td>$sor[$oszlop1]</td>";
-            echo "<td><img src = \"forras/$sor[$oszlop2]\" alt=\"kártya képe\"></td></tr>";
-           /*  echo "<br>"; */
-           
-        }
-        echo"</table>";
+    function rekordSzam($tabla){
+        $sql = "SELECT * FROM $tabla";
+        return $this->kapcsolat->query($sql)->num_rows;
     }
+    function tombKeszit($phpTomb){
+        $tomb = array();
+        while ($sor= $phpTomb->fetch_row()) {
+            $tomb[] = $sor[0];
+        }
+        return $tomb;
+    }
+    function kartyaRajz(){
+        $szinTomb =$this->adatLeker("kép","szín");
+        $formaTomb =$this->adatLeker("szöveg","forma");
+
+        $szinT = $this->tombKeszit($szinTomb);
+        $formaT = $this-> tombKeszit($formaTomb);
+        /* echo "$szinT[0]<br>";
+        echo "$formaT[0]"; */
+    }
+    function kartyaFeltolt($tabla){
+        //a meretet hatekonysagi okokbol noveltuk
+        $countSzin = $this->rekordSzam("szín")+1;
+        $countForma = $this->rekordSzam("forma")+1;
+        for ($i=1; $i < $countSzin; $i++) { 
+            for ($j=1; $j < $countForma; $j++) { 
+                $sql= "INSERT INTO $tabla (`kártyaAzon`, `színAzon`, `formaAzon`) VALUES (NULL, '$i', '$j')";
+                $this->kapcsolat->query($sql);
+            }
+        }
+    }
+
+    function torol($tabla){
+        $sql ="TRUNCATED table $tabla";
+       $torles =  $this->kapcsolat->query($sql);
+       return $torles;
+    }
+
+
     function kapcsolatBezar(){
         $this->kapcsolat->close();
     }
     
 }
-?>

@@ -1,6 +1,12 @@
 body{
     background-image: url(forras/ash.jpg);
-    
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+}
+main{
+    background-color: rgb(255, 255, 255,0.3);
 }
 table{
     background-color: aliceblue ;
